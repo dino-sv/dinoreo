@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>dino</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body{
+  margin:0;
+  font-family:'Poppins',Arial,sans-serif;
+  background:linear-gradient(135deg,#B5EAEA,#FADADD);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  overflow:hidden;
+  text-align:center;
+}
+
+.card{
+  background:rgba(255,255,255,.95);
+  padding:36px;
+  max-width:560px;
+  width:90%;
+  border-radius:18px;
+  box-shadow:0 25px 50px rgba(0,0,0,.2);
+  border:4px dashed #7FB3FF;
+  z-index:2;
+}
+
+h1{
+  color:#5A8DEE;
+  font-size:1.5rem;
+  margin-bottom:12px;
+}
+
+p{
+  line-height:1.8;
+  margin-bottom:18px;
+  font-size:1.05rem;
+  color:#444;
+}
+
+input{
+  display:block;
+  margin:18px auto;
+  padding:12px 18px;
+  border-radius:14px;
+  border:2px solid #7FB3FF;
+  text-align:center;
+  width:85%;
+  font-size:1rem;
+}
+
+button{
+  padding:12px 26px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:.95rem;
+}
+
+.yes{background:linear-gradient(135deg,#5A8DEE,#7FB3FF);color:#fff}
+.no{background:linear-gradient(135deg,#F48FB1,#F7A8C9);color:#fff}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-top:18px;
+}
+
+.heart{
+  font-size:1.6rem;
+  margin-top:18px;
+  color:#F06292;
+}
+
+.dino{
+  position:absolute;
+  font-size:2rem;
+  animation:float 18s linear infinite;
+  opacity:.6;
+}
+
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-130vh)}
+}
+
+/* popup */
+#popup{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(.7);
+  background:#fff;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 25px 60px rgba(240,98,146,.45);
+  border:3px solid #F48FB1;
+  z-index:100;
+  animation:kilig .6s ease forwards;
+}
+
+@keyframes kilig{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+  60%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="dino" style="left:10%">🦖</div>
+<div class="dino" style="left:30%;animation-delay:4s">🦕</div>
+<div class="dino" style="left:60%;animation-delay:7s">🦖</div>
+<div class="dino" style="left:80%;animation-delay:2s">🦕</div>
+
+<div class="card">
+
+<!-- NAME -->
+<div id="stepName">
+  <h1>hi 🦕</h1>
+  <p>can you tell me your name?</p>
+  <input id="nameInput" placeholder="your name" />
+  <button class="yes" onclick="startQuestions()">continue</button>
+</div>
+
+<!-- QUESTIONS -->
+<div id="stepQuestions" style="display:none">
+  <h1 id="qTitle"></h1>
+  <p id="questionText"></p>
+
+  <div class="buttons">
+    <button class="yes" onclick="answer(true)">yes</button>
+    <button class="no" onclick="answer(false)">no</button>
+  </div>
+
+  <p id="reaction" style="margin-top:14px;color:#777"></p>
+  <button class="yes" style="margin-top:14px" onclick="nextQuestion()">next</button>
+</div>
+
+<!-- CONFESSION -->
+<div id="stepConfession" style="display:none">
+  <h1 id="confessTitle"></h1>
+  <p id="confessionText"></p>
+  <div class="heart">(⁠.⁠ ❛⁠ ᴗ⁠ ❛⁠.⁠) ෆ 🦖</div>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+  <p style="font-size:1.1rem;color:#F06292;font-weight:600">
+    give this cutie a chance
+  </p>
+  <div style="margin:10px 0">💗🦖💗</div>
+  <div style="display:flex;gap:12px;justify-content:center;margin:12px 0">
+    <img src="image1.jpg" style="width:110px;border-radius:12px">
+    <img src="image2.jpg" style="width:110px;border-radius:12px">
+  </div>
+  <button class="yes" onclick="closePopup()">close</button>
+</div>
+
+<script>
+let name='';
+let qIndex=0;
+let cIndex=0;
+
+const questions=[
+  'did you know i sometimes notice you in class?',
+  'did you know i look your way more than i should?',
+  'did you know you make school feel lighter?',
+  'did you know i get shy when you’re near?'
+];
+
+const confession=[
+  'we’re just classmates, i know.',
+  'but somehow, you became someone special to me.',
+  'i like you—quietly, honestly, and softly.',
+  'no pressure. no expectations.',
+  'i just wanted you to know.'
+];
+
+function startQuestions(){
+  name=document.getElementById('nameInput').value.trim();
+  if(!name) return;
+  stepName.style.display='none';
+  stepQuestions.style.display='block';
+  qTitle.innerText=`hi, ${name} 🦕`;
+  questionText.innerText=questions[0];
+}
+
+function answer(isYes){
+  const yesR=[
+    '…that’s a little embarrassing 🦖',
+    'i was hoping you’d say yes ',
+    'okay that made my heart jump',
+    'now i’m extra nervous…'
+  ];
+  const noR=[
+    'that’s okay 🌱',
+    'sorry if that was awkward',
+    'thanks for being honest',
+    'i understand'
+  ];
+  reaction.innerText=isYes?yesR[qIndex]:noR[qIndex];
+}
+
+function nextQuestion(){
+  qIndex++;
+  reaction.innerText='';
+  if(qIndex<questions.length){
+    questionText.innerText=questions[qIndex];
+  }else{
+    stepQuestions.style.display='none';
+    stepConfession.style.display='block';
+    confessTitle.innerText=name;
+    showConfession();
+  }
+}
+
+function showConfession(){
+  if(cIndex<confession.length){
+    confessionText.innerText=confession[cIndex];
+    cIndex++;
+    setTimeout(showConfession,6000);
+  }else{
+    document.getElementById('popup').style.display='block';
+  }
+}
+
+function closePopup(){
+  popup.style.display='none';
+}
+</script>
+
+</body>
+  </html>
