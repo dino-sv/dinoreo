@@ -1,95 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dino</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+*{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:'Poppins',Arial,sans-serif;
-  background:linear-gradient(135deg,#B5EAEA,#FADADD);
+  background:
+    radial-gradient(circle at top,#ffe4ec,#cce7ff 60%),
+    linear-gradient(135deg,#b5eaea,#fadadd);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
   overflow:hidden;
   text-align:center;
 }
 
+/* floating dinos */
+.dino{
+  position:absolute;
+  font-size:2.4rem;
+  opacity:.5;
+  animation:float 22s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(120vh)}
+  to{transform:translateY(-140vh)}
+}
+
+/* main card */
 .card{
-  background:rgba(255,255,255,.95);
-  padding:36px;
-  max-width:560px;
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.85);
+  border-radius:28px;
+  padding:42px;
+  max-width:600px;
   width:90%;
-  border-radius:18px;
-  box-shadow:0 25px 50px rgba(0,0,0,.2);
-  border:4px dashed #7FB3FF;
+  box-shadow:0 30px 80px rgba(90,141,238,.35);
+  border:3px solid rgba(127,179,255,.6);
   z-index:2;
 }
 
+/* text */
 h1{
-  color:#5A8DEE;
-  font-size:1.5rem;
-  margin-bottom:12px;
+  font-size:1.6rem;
+  color:#5a8dee;
+  margin-bottom:14px;
 }
 
 p{
+  font-size:1.08rem;
   line-height:1.8;
-  margin-bottom:18px;
-  font-size:1.05rem;
   color:#444;
+  margin-bottom:18px;
 }
 
+/* input */
 input{
-  display:block;
-  margin:18px auto;
-  padding:12px 18px;
-  border-radius:14px;
-  border:2px solid #7FB3FF;
-  text-align:center;
   width:85%;
+  padding:14px 18px;
+  border-radius:999px;
+  border:2px solid #7fb3ff;
+  outline:none;
   font-size:1rem;
+  text-align:center;
 }
 
+/* buttons */
 button{
-  padding:12px 26px;
-  border-radius:999px;
   border:none;
-  cursor:pointer;
+  padding:12px 28px;
+  border-radius:999px;
   font-weight:600;
+  cursor:pointer;
   font-size:.95rem;
 }
 
-.yes{background:linear-gradient(135deg,#5A8DEE,#7FB3FF);color:#fff}
-.no{background:linear-gradient(135deg,#F48FB1,#F7A8C9);color:#fff}
+.yes{
+  background:linear-gradient(135deg,#5a8dee,#8bb8ff);
+  color:white;
+}
+
+.no{
+  background:linear-gradient(135deg,#f48fb1,#f7b2c9);
+  color:white;
+}
 
 .buttons{
   display:flex;
   justify-content:center;
   gap:18px;
-  margin-top:18px;
+  margin-top:20px;
 }
 
 .heart{
-  font-size:1.6rem;
-  margin-top:18px;
-  color:#F06292;
-}
-
-.dino{
-  position:absolute;
-  font-size:2rem;
-  animation:float 18s linear infinite;
-  opacity:.6;
-}
-
-@keyframes float{
-  from{transform:translateY(110vh)}
-  to{transform:translateY(-130vh)}
+  font-size:1.7rem;
+  margin-top:20px;
+  color:#f06292;
 }
 
 /* popup */
@@ -99,16 +115,16 @@ button{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(.7);
-  background:#fff;
-  border-radius:24px;
-  padding:30px;
-  box-shadow:0 25px 60px rgba(240,98,146,.45);
-  border:3px solid #F48FB1;
-  z-index:100;
-  animation:kilig .6s ease forwards;
+  background:white;
+  padding:32px;
+  border-radius:26px;
+  box-shadow:0 30px 90px rgba(240,98,146,.5);
+  border:3px solid #f7a8c9;
+  z-index:10;
+  animation:pop .6s ease forwards;
 }
 
-@keyframes kilig{
+@keyframes pop{
   0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
   60%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
   100%{transform:translate(-50%,-50%) scale(1)}
@@ -118,22 +134,24 @@ button{
 
 <body>
 
-<div class="dino" style="left:10%">🦖</div>
-<div class="dino" style="left:30%;animation-delay:4s">🦕</div>
-<div class="dino" style="left:60%;animation-delay:7s">🦖</div>
-<div class="dino" style="left:80%;animation-delay:2s">🦕</div>
+<!-- floating dinos -->
+<div class="dino" style="left:8%">🦖</div>
+<div class="dino" style="left:28%;animation-delay:4s">🦕</div>
+<div class="dino" style="left:55%;animation-delay:7s">🦖</div>
+<div class="dino" style="left:78%;animation-delay:2s">🦕</div>
 
 <div class="card">
 
-<!-- NAME -->
+<!-- STEP 1 -->
 <div id="stepName">
   <h1>hi 🦕</h1>
   <p>can you tell me your name?</p>
-  <input id="nameInput" placeholder="your name" />
+  <input id="nameInput" placeholder="your name">
+  <br><br>
   <button class="yes" onclick="startQuestions()">continue</button>
 </div>
 
-<!-- QUESTIONS -->
+<!-- STEP 2 -->
 <div id="stepQuestions" style="display:none">
   <h1 id="qTitle"></h1>
   <p id="questionText"></p>
@@ -143,11 +161,11 @@ button{
     <button class="no" onclick="answer(false)">no</button>
   </div>
 
-  <p id="reaction" style="margin-top:14px;color:#777"></p>
-  <button class="yes" style="margin-top:14px" onclick="nextQuestion()">next</button>
+  <p id="reaction" style="margin-top:16px;color:#777"></p>
+  <button class="yes" style="margin-top:16px" onclick="nextQuestion()">next</button>
 </div>
 
-<!-- CONFESSION -->
+<!-- STEP 3 -->
 <div id="stepConfession" style="display:none">
   <h1 id="confessTitle"></h1>
   <p id="confessionText"></p>
@@ -158,13 +176,13 @@ button{
 
 <!-- POPUP -->
 <div id="popup">
-  <p style="font-size:1.1rem;color:#F06292;font-weight:600">
+  <p style="font-size:1.15rem;color:#f06292;font-weight:600">
     give this cutie a chance
   </p>
   <div style="margin:10px 0">💗🦖💗</div>
-  <div style="display:flex;gap:12px;justify-content:center;margin:12px 0">
-    <img src="cutie1.jpg" style="width:110px;border-radius:12px">
-    <img src="cutie2.jpg" style="width:110px;border-radius:12px">
+  <div style="display:flex;gap:14px;justify-content:center;margin:12px 0">
+    <img src="image1.jpg" style="width:120px;border-radius:14px">
+    <img src="image2.jpg" style="width:120px;border-radius:14px">
   </div>
   <button class="yes" onclick="closePopup()">close</button>
 </div>
@@ -175,21 +193,18 @@ let qIndex=0;
 let cIndex=0;
 
 const questions=[
-  'do you know that I sometimes notice you in class?',
-  'do you know that I look your way more than i should?',
-  'do you know that you make school feel lighter?',
-  'do you know I get shy when you’re near?'
+  'did you know i sometimes notice you in class?',
+  'did you know i end up looking your way more than i should?',
+  'did you know you make school feel lighter?',
+  'did you know i get shy when you’re near?'
 ];
 
 const confession=[
-  'we’re just classmates, I know.',
-  'but somehow, you became someone I can’t stop noticing.',
-  'I notice the way you laugh at small things, the way you tuck your hair behind your ear, the way you focus when you don’t even realize anyone is watching.',
-  'I like you—softly, quietly, completely, and in a way that doesn’t need to be loud.',
-  'no rush. no expectations. no need to say anything back.',
-  'I just wanted you to know, because holding it in feels heavier than saying it.',
-  'I like you in the small moments—the way your voice softens when you’re thinking aloud.',
-  'and somehow, all of it—every small thing, every unguarded glance, every quiet laugh—makes the world feel brighter, like the sun decided to stay a little longer just to watch you exist 🦖.'
+  'we’re just classmates, i know.',
+  'but somehow, you became someone special to me.',
+  'i like you—softly, quietly, and honestly.',
+  'no pressure. no expectations.',
+  'i just wanted you to know.'
 ];
 
 function startQuestions(){
@@ -202,19 +217,7 @@ function startQuestions(){
 }
 
 function answer(isYes){
-  const yesR=[
-    '👉🏻👈🏻',
-    '👉🏻👈🏻',
-    '👉🏻👈🏻',
-    '👉🏻👈🏻'
-  ];
-  const noR=[
-    '😿',
-    '😿',
-    '😿',
-    '😿'
-  ];
-  reaction.innerText=isYes?yesR[qIndex]:noR[qIndex];
+  reaction.innerText=isYes?'👉🏻👈🏻':'😿';
 }
 
 function nextQuestion(){
@@ -236,7 +239,7 @@ function showConfession(){
     cIndex++;
     setTimeout(showConfession,6000);
   }else{
-    document.getElementById('popup').style.display='block';
+    popup.style.display='block';
   }
 }
 
@@ -246,4 +249,4 @@ function closePopup(){
 </script>
 
 </body>
-  </html>
+    </html>
