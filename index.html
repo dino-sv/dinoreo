@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,126 +8,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
 body{
   margin:0;
-  font-family:'Poppins',Arial,sans-serif;
-  background:
-    radial-gradient(circle at top,#ffe4ec,#cce7ff 60%),
-    linear-gradient(135deg,#b5eaea,#fadadd);
-  min-height:100vh;
+  height:100vh;
+  background:linear-gradient(135deg,#d9ecff,#ffd9ea);
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
+}
+
+.container{
+  width:90%;
+  max-width:420px;
+  background:rgba(255,255,255,0.9);
+  padding:30px 24px;
+  border-radius:22px;
   text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,0.12);
+}
+
+h1{
+  font-size:22px;
+  color:#4a7bd0;
+  margin-bottom:12px;
+}
+
+p{
+  font-size:16px;
+  color:#444;
+  line-height:1.7;
+  margin:12px 0;
+}
+
+button{
+  background:#6fa8ff;
+  color:white;
+  border:none;
+  padding:12px 26px;
+  border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+  margin-top:18px;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.hidden{
+  display:none;
 }
 
 /* floating dinos */
 .dino{
   position:absolute;
-  font-size:2.4rem;
-  opacity:.5;
-  animation:float 22s linear infinite;
+  font-size:28px;
+  opacity:0.4;
+  animation:float 12s linear infinite;
 }
 
 @keyframes float{
-  from{transform:translateY(120vh)}
-  to{transform:translateY(-140vh)}
-}
-
-/* main card */
-.card{
-  backdrop-filter:blur(18px);
-  background:rgba(255,255,255,.85);
-  border-radius:28px;
-  padding:42px;
-  max-width:600px;
-  width:90%;
-  box-shadow:0 30px 80px rgba(90,141,238,.35);
-  border:3px solid rgba(127,179,255,.6);
-  z-index:2;
-}
-
-/* text */
-h1{
-  font-size:1.6rem;
-  color:#5a8dee;
-  margin-bottom:14px;
-}
-
-p{
-  font-size:1.08rem;
-  line-height:1.8;
-  color:#444;
-  margin-bottom:18px;
-}
-
-/* input */
-input{
-  width:85%;
-  padding:14px 18px;
-  border-radius:999px;
-  border:2px solid #7fb3ff;
-  outline:none;
-  font-size:1rem;
-  text-align:center;
-}
-
-/* buttons */
-button{
-  border:none;
-  padding:12px 28px;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-  font-size:.95rem;
-}
-
-.yes{
-  background:linear-gradient(135deg,#5a8dee,#8bb8ff);
-  color:white;
-}
-
-.no{
-  background:linear-gradient(135deg,#f48fb1,#f7b2c9);
-  color:white;
-}
-
-.buttons{
-  display:flex;
-  justify-content:center;
-  gap:18px;
-  margin-top:20px;
-}
-
-.heart{
-  font-size:1.7rem;
-  margin-top:20px;
-  color:#f06292;
-}
-
-/* popup */
-#popup{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) scale(.7);
-  background:white;
-  padding:32px;
-  border-radius:26px;
-  box-shadow:0 30px 90px rgba(240,98,146,.5);
-  border:3px solid #f7a8c9;
-  z-index:10;
-  animation:pop .6s ease forwards;
-}
-
-@keyframes pop{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
-  60%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
-  100%{transform:translate(-50%,-50%) scale(1)}
+  from{transform:translateY(110vh);}
+  to{transform:translateY(-130vh);}
 }
 </style>
 </head>
@@ -135,118 +83,107 @@ button{
 <body>
 
 <!-- floating dinos -->
-<div class="dino" style="left:8%">🦖</div>
-<div class="dino" style="left:28%;animation-delay:4s">🦕</div>
-<div class="dino" style="left:55%;animation-delay:7s">🦖</div>
-<div class="dino" style="left:78%;animation-delay:2s">🦕</div>
+<div class="dino" style="left:8%;animation-delay:0s">🦖</div>
+<div class="dino" style="left:28%;animation-delay:3s">🦕</div>
+<div class="dino" style="left:55%;animation-delay:6s">🦖</div>
+<div class="dino" style="left:78%;animation-delay:1s">🦕</div>
 
-<div class="card">
+<div class="container">
 
-<!-- STEP 1 -->
-<div id="stepName">
-  <h1>hi 🦕</h1>
-  <p>can you tell me your name?</p>
-  <input id="nameInput" placeholder="your name">
-  <br><br>
-  <button class="yes" onclick="startQuestions()">continue</button>
+<!-- SCREEN 1 -->
+<div id="s1">
+  <h1>Happy New Year! 🎆🦖</h1>
+  <p>(｡•́‿•̀｡)<br>i made something for you</p>
+  <button onclick="go(2)">next →</button>
 </div>
 
-<!-- STEP 2 -->
-<div id="stepQuestions" style="display:none">
-  <h1 id="qTitle"></h1>
-  <p id="questionText"></p>
-
-  <div class="buttons">
-    <button class="yes" onclick="answer(true)">yes</button>
-    <button class="no" onclick="answer(false)">no</button>
-  </div>
-
-  <p id="reaction" style="margin-top:16px;color:#777"></p>
-  <button class="yes" style="margin-top:16px" onclick="nextQuestion()">next</button>
+<!-- SCREEN 2 -->
+<div id="s2" class="hidden">
+  <h1>🎧 a song just for you</h1>
+  <p><b>Lia</b> — Zild</p>
+  <iframe width="100%" height="215"
+    src="https://www.youtube.com/embed/3u5W8z4ZqA4"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+  <button onclick="go(3)">next →</button>
 </div>
 
-<!-- STEP 3 -->
-<div id="stepConfession" style="display:none">
-  <h1 id="confessTitle"></h1>
-  <p id="confessionText"></p>
-  <div class="heart">(⁠.⁠ ❛⁠ ᴗ⁠ ❛⁠.⁠) ෆ 🦖</div>
+<!-- SCREEN 3 -->
+<div id="s3" class="hidden">
+  <h1>do you want to open it? (≧◡≦)</h1>
+  <p>🦖💙</p>
+  <button onclick="go(4)">open it</button>
 </div>
 
+<!-- SCREEN 4 -->
+<div id="s4" class="hidden">
+  <h1>💌</h1>
+  <p>i wrote a letter for you…</p>
+  <button onclick="startConfession()">next →</button>
 </div>
 
-<!-- POPUP -->
-<div id="popup">
-  <p style="font-size:1.15rem;color:#f06292;font-weight:600">
-    give this cutie a chance
-  </p>
-  <div style="margin:10px 0">💗🦖💗</div>
-  <div style="display:flex;gap:14px;justify-content:center;margin:12px 0">
-    <img src="image1.jpg" style="width:120px;border-radius:14px">
-    <img src="image2.jpg" style="width:120px;border-radius:14px">
-  </div>
-  <button class="yes" onclick="closePopup()">close</button>
+<!-- CONFESSION -->
+<div id="confession" class="hidden">
+  <p id="line"></p>
+</div>
+
 </div>
 
 <script>
-let name='';
-let qIndex=0;
-let cIndex=0;
-
-const questions=[
-  'did you know i sometimes notice you in class?',
-  'did you know i end up looking your way more than i should?',
-  'did you know you make school feel lighter?',
-  'did you know i get shy when you’re near?'
+let lines = [
+  "hey.",
+  "my heart’s been trying to tell me something for a while now,",
+  "and i think i finally listened.",
+  "i keep thinking about you.",
+  "like… a lot.",
+  "and yeah, you’re really cute—",
+  "but it’s more than that.",
+  "",
+  "it’s the way you smile without realizing it.",
+  "",
+  "the way you talk about the smallest things like they matter.",
+  "",
+  "the way you’re kind, even when no one’s watching.",
+  "",
+  "the way your presence feels calm, like everything’s okay for a second.",
+  "",
+  "you make me want to be softer.",
+  "braver.",
+  "more honest.",
+  "",
+  "hmm.",
+  "hmmmm.",
+  "uhmmmm…",
+  "",
+  "okay.",
+  "here it is,",
+  "i like you,",
+  "because you’re you.",
+  "and telling you this is more than enough."
 ];
 
-const confession=[
-  'we’re just classmates, i know.',
-  'but somehow, you became someone special to me.',
-  'i like you—softly, quietly, and honestly.',
-  'no pressure. no expectations.',
-  'i just wanted you to know.'
-];
+let index = 0;
 
-function startQuestions(){
-  name=document.getElementById('nameInput').value.trim();
-  if(!name) return;
-  stepName.style.display='none';
-  stepQuestions.style.display='block';
-  qTitle.innerText=`hi, ${name} 🦕`;
-  questionText.innerText=questions[0];
+function go(n){
+  document.querySelectorAll('.container > div').forEach(d=>d.classList.add('hidden'));
+  document.getElementById('s'+n).classList.remove('hidden');
 }
 
-function answer(isYes){
-  reaction.innerText=isYes?'👉🏻👈🏻':'😿';
+function startConfession(){
+  document.querySelectorAll('.container > div').forEach(d=>d.classList.add('hidden'));
+  document.getElementById('confession').classList.remove('hidden');
+  showLine();
 }
 
-function nextQuestion(){
-  qIndex++;
-  reaction.innerText='';
-  if(qIndex<questions.length){
-    questionText.innerText=questions[qIndex];
-  }else{
-    stepQuestions.style.display='none';
-    stepConfession.style.display='block';
-    confessTitle.innerText=name;
-    showConfession();
+function showLine(){
+  if(index < lines.length){
+    document.getElementById('line').innerText = lines[index];
+    index++;
+    setTimeout(showLine, 6000);
   }
-}
-
-function showConfession(){
-  if(cIndex<confession.length){
-    confessionText.innerText=confession[cIndex];
-    cIndex++;
-    setTimeout(showConfession,6000);
-  }else{
-    popup.style.display='block';
-  }
-}
-
-function closePopup(){
-  popup.style.display='none';
 }
 </script>
 
 </body>
-    </html>
+</html>
